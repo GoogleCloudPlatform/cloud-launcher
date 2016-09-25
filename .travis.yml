@@ -29,3 +29,6 @@ before_script:
 
 script:
   - make test
+  - cd console/appengine
+  - make pip-install pip-install-test
+  - make test
