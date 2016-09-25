@@ -21,11 +21,24 @@ matrix:
   include:
     - os: linux
       dist: trusty
+      before_install:
+        - pushd "${HOME}"
+        - curl -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-127.0.0-linux-x86_64.tar.gz"
+        - tar zxf google-cloud-sdk.tar.gz
+        - popd
     - os: osx
+      before_install:
+        - pushd "${HOME}"
+        - curl -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-127.0.0-darwin-x86_64.tar.gz"
+        - tar zxf google-cloud-sdk.tar.gz
+        - popd
 
 before_script:
   - python --version
   - pip --version
 
 script:
+  - make test
+  - cd console/appengine
+  - make pip-install{,-dev,-test}
   - make test
