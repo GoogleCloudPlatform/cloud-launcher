@@ -21,7 +21,15 @@ matrix:
   include:
     - os: linux
       dist: trusty
+      before_install:
+        - cd "${HOME}"
+        - curl -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-127.0.0-linux-x86_64.tar.gz"
+        - tar zxf google-cloud-sdk.tar.gz
     - os: osx
+      before_install:
+        - cd "${HOME}"
+        - curl -o google-cloud-sdk.tar.gz "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-127.0.0-darwin-x86_64.tar.gz"
+        - tar zxf google-cloud-sdk.tar.gz
 
 before_script:
   - python --version
